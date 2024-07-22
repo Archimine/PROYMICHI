@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Payment</title>
+</head>
+<body>
+    <h1>Make a Payment</h1>
+    <form method="POST" action="{{ url_for('make_payment') }}">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.amount.label }}<br>
+            {{ form.amount() }}<br>
+            {% for error in form.amount.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

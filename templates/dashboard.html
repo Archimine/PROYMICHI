@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <p>Bienvenido, {{ current_user.username }}!</p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    {% if current_user.role == 'admin' %}
+        <a href="{{ url_for('create_course') }}">Crear Curso</a> |
+        <a href="{{ url_for('manage_enrollments') }}">Gestionar Matrículas</a>
+        <form action="{{ url_for('apply_mass_enrollments', course_id=1) }}" method="post">
+            <button type="submit">Apply Mass Enrollments to Course 1</button>
+        </form>
+        <form action="{{ url_for('duplicate_course', course_id=1) }}" method="post">
+            <button type="submit">Duplicate Course 1</button>
+        </form>
+        <a href="{{ url_for('waitlist_report', course_id=1) }}">View Waitlist for Course 1</a>
+        <a href="{{ url_for('admin_courses') }}">Ver Cursos</a>  <!-- Enlace agregado -->
+    {% elif current_user.role == 'student' %}
+        <a href="{{ url_for('list_courses') }}">Buscar Cursos</a> |
+        <a href="{{ url_for('make_payment') }}">Realizar Pago</a>
+    {% elif current_user.role == 'teacher' %}
+        <!-- Aquí podrías añadir enlaces específicos para profesores -->
+        <a href="{{ url_for('course_report', course_id=1) }}">Ver Reporte de Curso</a> <!-- Ejemplo, debes pasar el ID del curso -->
+    {% endif %}
+    {% if current_user.role == 'admin' or current_user.role == 'teacher' %}
+        <h2>Courses</h2>
+        <ul>
+            {% for course in courses %}
+                <li>
+                    {{ course.name }} - 
+                    <a href="{{ url_for('course_students', course_id=course.id) }}">View Students</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

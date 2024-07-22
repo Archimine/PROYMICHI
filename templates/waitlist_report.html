@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waitlist Report</title>
+</head>
+<body>
+    <h1>Waitlist Report for {{ course.name }}</h1>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student Username</th>
+                <th>Student Email</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in waitlist_entries %}
+            <tr>
+                <td>{{ entry.student.username }}</td>
+                <td>{{ entry.student.email }}</td>
+                <td>{{ entry.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

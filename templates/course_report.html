@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Report</title>
+</head>
+<body>
+    <h1>Course Report for {{ course.name }}</h1>
+    <ul>
+        {% for enrollment in enrollments %}
+            <li>{{ enrollment.student.username }} - {{ enrollment.status }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

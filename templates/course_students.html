@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students in {{ course.name }}</title>
+</head>
+<body>
+    <h1>Students in {{ course.name }}</h1>
+    <p>Description: {{ course.description }}</p>
+    
+    <h2>Enrolled Students</h2>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.username }} ({{ student.email }})</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
