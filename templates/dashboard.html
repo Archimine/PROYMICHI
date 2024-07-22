@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <p>Bienvenido, {{ current_user.username }}!</p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    {% if current_user.role == 'admin' %}
+        <a href="{{ url_for('create_course') }}">Crear Curso</a> |
+        <a href="{{ url_for('manage_enrollments') }}">Gestionar Matrículas</a>
+    {% elif current_user.role == 'student' %}
+        <a href="{{ url_for('list_courses') }}">Buscar Cursos</a> |
+        <a href="{{ url_for('make_payment') }}">Realizar Pago</a>
+    {% elif current_user.role == 'teacher' %}
+        <!-- Aquí podrías añadir enlaces específicos para profesores -->
+        <a href="{{ url_for('course_report', course_id=1) }}">Ver Reporte de Curso</a> <!-- Ejemplo, debes pasar el ID del curso -->
+    {% endif %}
+</body>
+</html>
